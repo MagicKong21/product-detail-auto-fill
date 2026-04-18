@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         商品详情页一键填写
 // @namespace    http://tampermonkey.net/
-// @version      5.0
+// @version      5.0.1
 // @description  自动解析文案并填充到商品详情页表单，支持批量上传图片
 // @author       You
-// @match        https://md2img.lizhi.host*
+// @match        https://md2img.lizhi.host/*
 // @icon         data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjY3ZWVhIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6Izc2NGJhMiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9InVybCgjYmcpIi8+CiAgPCEtLSDooajljZUv5paH5qGj5Zu+5qCHIC0tPgogIDxyZWN0IHg9IjE0IiB5PSIxMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjQwIiByeD0iMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiIG9wYWNpdHk9IjAuOSIvPgogIDwhLS0g6KGo5Y2V57q/5p2hIC0tPgogIDxsaW5lIHgxPSIyMSIgeTE9IjIzIiB4Mj0iMzgiIHkyPSIyMyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC44Ii8+CiAgPGxpbmUgeDE9IjIxIiB5MT0iMzEiIHgyPSIzNCIgeTI9IjMxIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjgiLz4KICA8bGluZSB4MT0iMjEiIHkxPSIzOSIgeDI9IjMwIiB5Mj0iMzkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuOCIvPgogIDwhLS0g5Yu+6YCJ5qCH6K6wIC0tPgogIDxjaXJjbGUgY3g9IjQ2IiBjeT0iNDQiIHI9IjExIiBmaWxsPSJ3aGl0ZSIvPgogIDxwYXRoIGQ9Ik00MCA0NCBMNDQgNDggTDUyIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiM2NjdlZWEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=
 // @grant        GM_addStyle
 // @license      MIT
@@ -124,7 +124,7 @@
 
             if (trimmed.startsWith('## 规格区别')) { saveBuffer(); currentSection = 'specDifferences'; buffer = []; continue; }
             if (trimmed.startsWith('## 特殊说明')) { saveBuffer(); currentSection = 'specialNotes'; buffer = []; continue; }
-            if (trimmed.startsWith('## 软件介绍') || trimmed.startsWith('## 商品介绍') || trimmed.startsWith('## 商品简介')) { saveBuffer(); currentSection = 'introduction'; buffer = []; continue; }
+            if (trimmed.match(/^##\s*(软件介绍|软件简介|商品介绍|商品简介)(\s|$)/)) { saveBuffer(); currentSection = 'introduction'; buffer = []; continue; }
             if (trimmed.startsWith('## 使用场景')) { saveBuffer(); currentSection = 'scenarios'; buffer = []; continue; }
             if (trimmed.startsWith('## 商品轮播图文案') || trimmed.startsWith('## 配图文案')) { saveBuffer(); currentSection = 'banner'; buffer = []; continue; }
             if (trimmed.startsWith('## 激活教程')) { saveBuffer(); currentSection = 'activation'; buffer = []; continue; }
