@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         商品详情页一键填写
 // @namespace    http://tampermonkey.net/
-// @version      5.0.1
+// @version      5.0.2
 // @description  自动解析文案并填充到商品详情页表单，支持批量上传图片
 // @author       You
 // @match        https://md2img.lizhi.host/*
