@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         商品详情页一键填写
+// @name         Product Detail Auto Fill
 // @namespace    http://tampermonkey.net/
 // @version      5.0.2
 // @description  自动解析文案并填充到商品详情页表单，支持批量上传图片
